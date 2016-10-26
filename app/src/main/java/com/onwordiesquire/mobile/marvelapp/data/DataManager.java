@@ -64,6 +64,7 @@ public class DataManager {
         //disk (SQLite DB) observable source
         Observable<CharacterData> disk = databaseDataSource.getCharacter(name);
 
+        //RX design pattern to implement caching. Data is fetched first from the disk if available before the Api.
         return Observable.concat(disk, api).first(characterData -> {
             return characterData != null;
         });
@@ -76,6 +77,7 @@ public class DataManager {
     public Observable<CharacterData> getCharacterById(String characterId) {
         return databaseDataSource.getCharacterById(characterId)
                 .doOnNext(characterData -> {
+                    //once we reach this point a search has successfully executed, therefore, store it in the DB
                     databaseDataSource.insertRecentSearches( RecentSearches.builder().name(characterData.name())
                             .characterId(characterData.id())
                             .build());
@@ -86,11 +88,17 @@ public class DataManager {
         return databaseDataSource.getRecentSearches();
     }
 
+    //Helper method to generate an MD5 hash necessary for communicating with the marvel api
     private  String createHash(String timestamp,String apikey,String privateKey)
     {
         return new String(Hex.encodeHex(DigestUtils.md5(timestamp+privateKey+apikey)));
     }
 
+
+    /**
+     * An exception representing an empty result from the api. This will help subscribers in the presenter layer
+     * understand what happened.
+     */
     public static class EmptyResultsException extends Exception {
         public EmptyResultsException(String message) {
             super(message);

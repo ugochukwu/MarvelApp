@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements SearchView {
     private ItemListAdapter adapter;
     private Dialog errorDialog;
     private ProgressDialog progressDialog;
+    private Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,13 +94,21 @@ public class MainActivity extends AppCompatActivity implements SearchView {
     @Override
     public void showError(String message) {
 
-        Snackbar.make(recyclerView, message, Snackbar.LENGTH_LONG).show();
+        showSnackbar(message);
     }
 
     @Override
     public void showEmptyState() {
         String message = " The entered name is wrong";
-        Snackbar.make(recyclerView, message, Snackbar.LENGTH_LONG).show();
+        showSnackbar(message);
+    }
+
+    private void showSnackbar(String message) {
+        if(snackbar == null) {
+            snackbar = Snackbar.make(recyclerView, message, Snackbar.LENGTH_LONG);
+            snackbar.getView().setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
+        }
+        snackbar.show();
     }
 
     @Override
@@ -146,12 +156,15 @@ public class MainActivity extends AppCompatActivity implements SearchView {
         } else {
             Timber.i("Search Field  empty");
 
-            Snackbar.make(recyclerView, message, Snackbar.LENGTH_LONG).show();
+            showSnackbar(message);
 
 
         }
     }
 
+    /**
+     * Adapter to handle list of recent searches
+     */
     class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemViewHolder> {
 
         private List<RecentSearches> data;
