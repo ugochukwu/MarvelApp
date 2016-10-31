@@ -3,4 +3,6 @@
     <string name="dialog_error_title">Error</string>
     <string name="dialog_action_ok">Ok</string>
     <string name="no_search">No searches executed yet</string>
+    <string name="not_available">Not Available</string>
+    <string name="desc_not_available">Sorry but the description for this character is not available</string>
 </resources>

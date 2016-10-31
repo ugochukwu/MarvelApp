@@ -3,11 +3,13 @@ package com.onwordiesquire.mobile.marvelapp;
 import android.app.Application;
 import android.content.Context;
 
+import com.crashlytics.android.Crashlytics;
 import com.facebook.stetho.Stetho;
 import com.onwordiesquire.mobile.marvelapp.injection.components.AppComponent;
 import com.onwordiesquire.mobile.marvelapp.injection.components.DaggerAppComponent;
 import com.onwordiesquire.mobile.marvelapp.injection.module.AppModule;
 
+import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 /**
@@ -22,6 +24,7 @@ public class MarvelApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         this.app = this;
         component = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
         Stetho.initializeWithDefaults(this);

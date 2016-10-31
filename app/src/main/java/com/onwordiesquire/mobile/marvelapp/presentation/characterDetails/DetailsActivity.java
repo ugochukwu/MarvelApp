@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -86,7 +87,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
     public void displayCharacterDetails(CharacterData characterData) {
         String name = characterData.name();
         nameTxtView.setText(name);
-        description.setText(characterData.description());
+        description.setText(TextUtils.isEmpty(characterData.description())?getString(R.string.desc_not_available):characterData.description());
         Thumbnail thumbnail = characterData.thumbnail();
         if (thumbnail != null) {
             String portrait_xlarge = thumbnail.path().concat("/portrait_xlarge").concat(".").concat(thumbnail.extension());

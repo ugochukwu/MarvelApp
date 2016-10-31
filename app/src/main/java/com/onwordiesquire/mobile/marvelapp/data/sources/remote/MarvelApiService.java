@@ -1,7 +1,11 @@
 package com.onwordiesquire.mobile.marvelapp.data.sources.remote;
 
+import android.os.Build;
+import android.os.Debug;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.onwordiesquire.mobile.marvelapp.BuildConfig;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterDataWrapper;
 import com.onwordiesquire.mobile.marvelapp.util.MyGsonTypeAdapterFactory;
 
@@ -27,18 +31,22 @@ public interface MarvelApiService {
     public String ENDPOINT = "http://gateway.marvel.com:80/v1/public/";
 
     @GET("characters")
-    public Observable<CharacterDataWrapper> getMarvelCharacter(@Query("name")String name, @Query("apikey") String apikey,
-                                                               @Query("ts")String timestamp, @Query("hash")String md5Hash);
+    public Observable<CharacterDataWrapper> getMarvelCharacter(@Query("name") String name, @Query("apikey") String apikey,
+                                                               @Query("ts") String timestamp, @Query("hash") String md5Hash);
 
 
+    class HELPER {
 
-    class HELPER{
+        public static MarvelApiService newMarvelApiService() {
+            OkHttpClient client = null;
+            if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+            } else {
+                client = new OkHttpClient.Builder().build();
 
-        public static MarvelApiService newMarvelApiService(){
-
-            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+            }
 
 
             Gson gson = new GsonBuilder().registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())
@@ -54,9 +62,8 @@ public interface MarvelApiService {
             return retrofit.create(MarvelApiService.class);
         }
 
-        public static String createHash(String timestamp,String apikey,String privateKey)
-        {
-            return new String(Hex.encodeHex(DigestUtils.md5(timestamp+privateKey+apikey)));
+        public static String createHash(String timestamp, String apikey, String privateKey) {
+            return new String(Hex.encodeHex(DigestUtils.md5(timestamp + privateKey + apikey)));
         }
     }
 }
