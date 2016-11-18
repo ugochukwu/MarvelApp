@@ -2,7 +2,6 @@ package com.onwordiesquire.mobile.marvelapp.data;
 
 import com.onwordiesquire.mobile.marvelapp.BuildConfig;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterData;
-import com.onwordiesquire.mobile.marvelapp.data.model.CharacterDataContainer;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterDataWrapper;
 import com.onwordiesquire.mobile.marvelapp.data.sources.local.DatabaseDataSource;
 import com.onwordiesquire.mobile.marvelapp.data.sources.remote.MarvelApiService;
@@ -14,15 +13,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,12 +32,12 @@ public class DataManagerTest {
     MarvelApiService mockApiService;
     @Mock
     DatabaseDataSource mockDBSource;
-    DataManager dataManager;
+    CharacterDataRepositoryImpl dataManager;
     private CharacterDataWrapper testDataWrapper;
 
     @Before
     public void setup() {
-        dataManager = new DataManager(mockApiService, mockDBSource);
+        dataManager = new CharacterDataRepositoryImpl(mockApiService, mockDBSource);
         testDataWrapper = TestDataFactory.generateFakeDataWrapper();
 
     }
@@ -75,7 +69,7 @@ public class DataManagerTest {
     @Test
     public void testGetCharacterEmitsException() throws Exception{
         //arrange
-        DataManager.EmptyResultsException exception = new DataManager.EmptyResultsException("No Results");
+        CharacterDataRepositoryImpl.EmptyResultsException exception = new CharacterDataRepositoryImpl.EmptyResultsException("No Results");
         when(mockApiService.getMarvelCharacter(anyString(),anyString(),anyString(),anyString()))
                 .thenReturn(Observable.error(exception));
         TestSubscriber<CharacterData> testSubscriber = new TestSubscriber<>();
@@ -87,7 +81,7 @@ public class DataManagerTest {
                 .subscribe(testSubscriber);
 
         //assert
-        testSubscriber.assertError(DataManager.EmptyResultsException.class);
+        testSubscriber.assertError(CharacterDataRepositoryImpl.EmptyResultsException.class);
     }
 
 }

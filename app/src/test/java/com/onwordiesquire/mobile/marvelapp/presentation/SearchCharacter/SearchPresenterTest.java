@@ -1,7 +1,7 @@
 package com.onwordiesquire.mobile.marvelapp.presentation.SearchCharacter;
 
 import com.onwordiesquire.mobile.marvelapp.BuildConfig;
-import com.onwordiesquire.mobile.marvelapp.data.DataManager;
+import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepositoryImpl;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterData;
 import com.onwordiesquire.mobile.marvelapp.data.model.RecentSearches;
 import com.onwordiesquire.mobile.marvelapp.util.RxSchedulersOverrideRule;
@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class SearchPresenterTest {
     @Mock
-    DataManager mockDataManager;
+    CharacterDataRepositoryImpl mockDataManager;
     @Mock
     SearchView mockSearchView;
 
@@ -140,7 +140,7 @@ public class SearchPresenterTest {
     private void stubGetCharacterReturnEmpty()
     {
         when(mockDataManager.getCharacter(anyString(),anyString(),anyString(),anyString()))
-                .thenReturn(Observable.error(new DataManager.EmptyResultsException("")));
+                .thenReturn(Observable.error(new CharacterDataRepositoryImpl.EmptyResultsException("")));
 
     }
 

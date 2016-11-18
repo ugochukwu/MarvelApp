@@ -1,6 +1,6 @@
 package com.onwordiesquire.mobile.marvelapp.presentation.characterDetails;
 
-import com.onwordiesquire.mobile.marvelapp.data.DataManager;
+import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepositoryImpl;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterData;
 import com.onwordiesquire.mobile.marvelapp.util.RxSchedulersOverrideRule;
 import com.onwordiesquire.mobile.marvelapp.util.TestDataFactory;
@@ -33,7 +33,7 @@ public class DetailsPresenterTest {
     @Mock
     DetailsView mockDetailsView;
     @Mock
-    DataManager mockDataManager;
+    CharacterDataRepositoryImpl mockDataManager;
 
     DetailsPresenter presenter;
     @Rule

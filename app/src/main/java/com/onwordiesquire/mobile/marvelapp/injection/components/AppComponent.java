@@ -1,6 +1,6 @@
 package com.onwordiesquire.mobile.marvelapp.injection.components;
 
-import com.onwordiesquire.mobile.marvelapp.data.DataManager;
+import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepositoryImpl;
 import com.onwordiesquire.mobile.marvelapp.data.sources.local.DatabaseDataSource;
 import com.onwordiesquire.mobile.marvelapp.data.sources.remote.MarvelApiService;
 import com.onwordiesquire.mobile.marvelapp.injection.module.AppModule;
@@ -22,7 +22,7 @@ public interface AppComponent {
     void inject(DetailsActivity detailsActivity);
 
     //expose data manager to downstream components
-    DataManager dataManager();
+    CharacterDataRepositoryImpl dataManager();
     DatabaseDataSource databaseDataSource();
     MarvelApiService marvelApiService();
 }

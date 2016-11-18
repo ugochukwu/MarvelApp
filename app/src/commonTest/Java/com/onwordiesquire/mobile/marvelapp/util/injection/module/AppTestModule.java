@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.onwordiesquire.mobile.marvelapp.MarvelApp;
-import com.onwordiesquire.mobile.marvelapp.data.DataManager;
+import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepositoryImpl;
 import com.onwordiesquire.mobile.marvelapp.data.sources.local.DatabaseDataSource;
 import com.onwordiesquire.mobile.marvelapp.data.sources.remote.MarvelApiService;
 
@@ -48,8 +48,8 @@ public class AppTestModule {
 
     @Provides
     @Singleton
-    public DataManager providesDataManager() {
-        return mock(DataManager.class);
+    public CharacterDataRepositoryImpl providesDataManager() {
+        return mock(CharacterDataRepositoryImpl.class);
     }
 
     @Provides

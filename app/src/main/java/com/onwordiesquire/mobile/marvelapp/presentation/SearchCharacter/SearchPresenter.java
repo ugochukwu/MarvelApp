@@ -1,9 +1,7 @@
 package com.onwordiesquire.mobile.marvelapp.presentation.SearchCharacter;
 
-import com.onwordiesquire.mobile.marvelapp.data.DataManager;
+import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepositoryImpl;
 import com.onwordiesquire.mobile.marvelapp.presentation.BasePresenter;
-
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -20,11 +18,11 @@ import timber.log.Timber;
 @Singleton
 public class SearchPresenter extends BasePresenter<SearchView> {
 
-    DataManager dataManager;
+    CharacterDataRepositoryImpl dataManager;
     CompositeSubscription compositeSubscription;
 
     @Inject
-    public SearchPresenter(DataManager dataManager) {
+    public SearchPresenter(CharacterDataRepositoryImpl dataManager) {
         this.dataManager = dataManager;
     }
 
@@ -71,7 +69,7 @@ public class SearchPresenter extends BasePresenter<SearchView> {
                     getMvpView().showProgressIndicator(false);
                     getMvpView().showCharacterDetails(characterData);
                 }, e -> {
-                    if (e instanceof DataManager.EmptyResultsException) {
+                    if (e instanceof CharacterDataRepositoryImpl.EmptyResultsException) {
                         getMvpView().showProgressIndicator(false);
                         getMvpView().showEmptyState();
                     } else {

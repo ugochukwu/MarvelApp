@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,14 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.onwordiesquire.mobile.marvelapp.BuildConfig;
 import com.onwordiesquire.mobile.marvelapp.MarvelApp;
 import com.onwordiesquire.mobile.marvelapp.R;
-import com.onwordiesquire.mobile.marvelapp.data.DataManager;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterData;
 import com.onwordiesquire.mobile.marvelapp.data.model.RecentSearches;
 import com.onwordiesquire.mobile.marvelapp.presentation.characterDetails.DetailsActivity;
@@ -40,8 +37,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements SearchView {

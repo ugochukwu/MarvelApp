@@ -1,8 +1,7 @@
 package com.onwordiesquire.mobile.marvelapp.presentation.characterDetails;
 
-import com.onwordiesquire.mobile.marvelapp.data.DataManager;
+import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepositoryImpl;
 import com.onwordiesquire.mobile.marvelapp.presentation.BasePresenter;
-import com.onwordiesquire.mobile.marvelapp.presentation.MvpView;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -18,11 +17,11 @@ import timber.log.Timber;
 @Singleton
 public class DetailsPresenter extends BasePresenter<DetailsView> {
 
-    private final DataManager dataManager;
+    private final CharacterDataRepositoryImpl dataManager;
     private CompositeSubscription compositeSubscription;
 
     @Inject
-    public DetailsPresenter(DataManager dataManager) {
+    public DetailsPresenter(CharacterDataRepositoryImpl dataManager) {
         this.dataManager = dataManager;
     }
 

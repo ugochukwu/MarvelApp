@@ -22,15 +22,15 @@ import rx.Observable;
  * Created by michelonwordi on 10/23/16.
  */
 @Singleton
-public class DataManager {
+public class CharacterDataRepositoryImpl {
 
-    private static final String TAG = DataManager.class.getSimpleName();
+    private static final String TAG = CharacterDataRepositoryImpl.class.getSimpleName();
     private final MarvelApiService apiService;
     private final DatabaseDataSource databaseDataSource;
     private List<CharacterData> cache = null;
 
     @Inject
-    public DataManager(MarvelApiService apiService, DatabaseDataSource databaseDataSource) {
+    public CharacterDataRepositoryImpl(MarvelApiService apiService, DatabaseDataSource databaseDataSource) {
         this.apiService = apiService;
         this.databaseDataSource = databaseDataSource;
     }
