@@ -16,10 +16,10 @@ public class MarvelCharacter {
     private String description;
     private String modified;
     private String resourceURI;
-    private List<URL> Urls;
+    private List<String> Urls;
     private String thumbnail;
 
-    public MarvelCharacter(String id, String name, String description, String modified, String resourceURI, List<URL> urls, String thumbnail) {
+    public MarvelCharacter(String id, String name, String description, String modified, String resourceURI, List<String> urls, String thumbnail) {
         this.id = id;
         this.name = name;
         this.description = description;

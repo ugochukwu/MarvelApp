@@ -3,6 +3,8 @@ package com.onwordiesquire.mobile.marvelapp.data;
 import com.onwordiesquire.mobile.marvelapp.characterdetails.domain.model.MarvelCharacter;
 import com.onwordiesquire.mobile.marvelapp.data.model.RecentSearches;
 
+import java.util.List;
+
 import rx.Observable;
 
 /**
@@ -13,7 +15,7 @@ public interface CharacterDataRepository {
 
     Observable<MarvelCharacter> getCharacterByName(String name);
     Observable<MarvelCharacter> getCharacterById(String id);
-    Observable<RecentSearches> getRecentSearches();
+    Observable<List<RecentSearches>> getRecentSearches();
     Observable<MarvelCharacter> getAllCharacters();
 
 }
