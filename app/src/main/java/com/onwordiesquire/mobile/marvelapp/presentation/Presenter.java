@@ -6,7 +6,7 @@ package com.onwordiesquire.mobile.marvelapp.presentation;
 
 public interface Presenter<V extends MvpView> {
 
-    public void attachView(V view);
+     void attachView(V view);
 
-    public void detachView();
+     void detachView();
 }

@@ -3,6 +3,7 @@ package com.onwordiesquire.mobile.marvelapp.util;
 import android.content.Context;
 
 import com.onwordiesquire.mobile.marvelapp.MarvelApp;
+import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepository;
 import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepositoryImpl;
 import com.onwordiesquire.mobile.marvelapp.data.sources.local.DatabaseDataSource;
 import com.onwordiesquire.mobile.marvelapp.data.sources.remote.MarvelApiService;
@@ -33,7 +34,7 @@ public class TestAppComponentRule implements TestRule {
         return context;
     }
 
-    public CharacterDataRepositoryImpl getMockDataManager() {
+    public CharacterDataRepository getMockDataManager() {
         return testAppComponent.dataManager();
     }
 

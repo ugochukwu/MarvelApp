@@ -6,6 +6,8 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.onwordiesquire.mobile.marvelapp.R;
+import com.onwordiesquire.mobile.marvelapp.characterlookup.domain.model.MarvelCharacter;
+import com.onwordiesquire.mobile.marvelapp.characterlookup.presentation.MainActivity;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterData;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterDataWrapper;
 import com.onwordiesquire.mobile.marvelapp.data.model.RecentSearches;
@@ -31,7 +33,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 
-import static android.support.test.espresso.matcher.ViewMatchers.withInputType;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
@@ -139,9 +140,9 @@ public class MainActivityTest {
                 .thenReturn(value);
     }
 
-    private OngoingStubbing<Observable<CharacterData>> stubGetCharacterByName(Observable value)
+    private OngoingStubbing<Observable<MarvelCharacter>> stubGetCharacterByName(Observable value)
     {
-        return when(componentRule.getMockDataManager().getCharacter(anyString(),anyString(),anyString(),anyString()))
+        return when(componentRule.getMockDataManager().getCharacterByName(anyString()))
                 .thenReturn(value);
     }
 

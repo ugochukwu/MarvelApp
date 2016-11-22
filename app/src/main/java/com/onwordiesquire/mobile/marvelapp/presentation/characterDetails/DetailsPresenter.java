@@ -44,7 +44,7 @@ public class DetailsPresenter extends BasePresenter<DetailsView> {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(characterData -> {
-                   getMvpView().displayCharacterDetails(characterData);
+//                   getMvpView().displayCharacterDetails(characterData);
 
                 },e->{
                     getMvpView().showError("An Error Occurred");

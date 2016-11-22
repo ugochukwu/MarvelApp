@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.onwordiesquire.mobile.marvelapp.BuildConfig;
 import com.onwordiesquire.mobile.marvelapp.DataConverter;
-import com.onwordiesquire.mobile.marvelapp.characterdetails.domain.model.MarvelCharacter;
+import com.onwordiesquire.mobile.marvelapp.characterlookup.domain.model.MarvelCharacter;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterData;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterDataContainer;
 import com.onwordiesquire.mobile.marvelapp.data.model.RecentSearches;
@@ -26,7 +26,6 @@ import rx.Observable;
 /**
  * Created by michelonwordi on 10/23/16.
  */
-@Singleton
 public class CharacterDataRepositoryImpl implements CharacterDataRepository {
 
     private static final String TAG = CharacterDataRepositoryImpl.class.getSimpleName();
@@ -147,14 +146,5 @@ public class CharacterDataRepositoryImpl implements CharacterDataRepository {
     }
 
 
-    /**
-     * An exception representing an empty result from the api. This will help subscribers in the presenter layer
-     * understand what happened.
-     */
-    public static class EmptyResultsException extends Exception {
-        public EmptyResultsException(String message) {
-            super(message);
 
-        }
-    }
 }

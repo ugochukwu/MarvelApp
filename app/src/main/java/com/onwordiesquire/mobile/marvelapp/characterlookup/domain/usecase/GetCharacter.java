@@ -1,7 +1,7 @@
-package com.onwordiesquire.mobile.marvelapp.characterdetails.domain.usecase;
+package com.onwordiesquire.mobile.marvelapp.characterlookup.domain.usecase;
 
 import com.onwordiesquire.mobile.marvelapp.UseCase;
-import com.onwordiesquire.mobile.marvelapp.characterdetails.domain.model.MarvelCharacter;
+import com.onwordiesquire.mobile.marvelapp.characterlookup.domain.model.MarvelCharacter;
 import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepository;
 
 

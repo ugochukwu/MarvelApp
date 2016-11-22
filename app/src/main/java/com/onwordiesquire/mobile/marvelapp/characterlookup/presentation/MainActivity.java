@@ -1,4 +1,4 @@
-package com.onwordiesquire.mobile.marvelapp.presentation.SearchCharacter;
+package com.onwordiesquire.mobile.marvelapp.characterlookup.presentation;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -20,11 +20,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.onwordiesquire.mobile.marvelapp.BuildConfig;
 import com.onwordiesquire.mobile.marvelapp.MarvelApp;
 import com.onwordiesquire.mobile.marvelapp.R;
-import com.onwordiesquire.mobile.marvelapp.data.model.CharacterData;
+import com.onwordiesquire.mobile.marvelapp.characterlookup.domain.model.MarvelCharacter;
+import com.onwordiesquire.mobile.marvelapp.characterlookup.domain.model.SearchTerm;
 import com.onwordiesquire.mobile.marvelapp.data.model.RecentSearches;
+import com.onwordiesquire.mobile.marvelapp.injection.components.DaggerCharacterInfoComponent;
 import com.onwordiesquire.mobile.marvelapp.presentation.characterDetails.DetailsActivity;
 import com.onwordiesquire.mobile.marvelapp.util.DialogFactory;
 import com.onwordiesquire.mobile.marvelapp.util.EmptyStateRecyclerView;
@@ -39,7 +40,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity implements SearchView {
+public class MainActivity extends AppCompatActivity implements CharacterLookUpContract.View {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final String CHARACTER_DATA_ID = TAG.concat("character_data_id");
@@ -61,14 +62,25 @@ public class MainActivity extends AppCompatActivity implements SearchView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        MarvelApp.get().getComponent().inject(this);
-        searchPresenter.attachView(this);
+
+        //injection
+        initializeInjector();
+
 
         setupRecycler();
 
-        searchPresenter.loadLastSearchedCharacters();
+        searchPresenter.attachView(this);
+//        searchPresenter.loadLastSearchedCharacters();
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    }
+
+    private void initializeInjector() {
+        DaggerCharacterInfoComponent.builder()
+                .appComponent(MarvelApp.get().getComponent())
+                .build()
+                .inject(this);
     }
 
     private void setupRecycler() {
@@ -80,11 +92,6 @@ public class MainActivity extends AppCompatActivity implements SearchView {
 
     }
 
-    @Override
-    public void displayLastFiveSearches(List<RecentSearches> characters) {
-        adapter.setData(characters);
-        adapter.notifyDataSetChanged();
-    }
 
     @Override
     public void showError(String message) {
@@ -93,24 +100,30 @@ public class MainActivity extends AppCompatActivity implements SearchView {
     }
 
     @Override
-    public void showEmptyState() {
-        String message = " The entered name is wrong";
+    public void displayPreviousSearchTerms(List<SearchTerm> searchTerm) {
+//        adapter.setData(searchTerm);
+        adapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void showEmptyState(String message) {
         showSnackbar(message);
     }
 
     private void showSnackbar(String message) {
-        if(snackbar == null) {
+        if (snackbar == null) {
             snackbar = Snackbar.make(recyclerView, message, Snackbar.LENGTH_LONG);
-            snackbar.getView().setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
+            snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         }
         snackbar.show();
     }
 
     @Override
-    public void showCharacterDetails(CharacterData characterData) {
+    public void showCharacterDetails(MarvelCharacter characterData) {
 
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra(CHARACTER_DATA_ID, characterData.id());
+        intent.putExtra(CHARACTER_DATA_ID, characterData.getId());
         startActivity(intent);
         finish();
 
@@ -129,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements SearchView {
                 progressDialog = DialogFactory.createProgressDialog(this, "Searching...");
             }
             progressDialog.show();
-        } else {
+        } else if (progressDialog != null){
             progressDialog.dismiss();
         }
     }
@@ -147,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements SearchView {
         if (!TextUtils.isEmpty(characterName)) {
             Timber.i("Search Field Not empty");
             int millis = Calendar.getInstance().get(Calendar.MILLISECOND);
-            searchPresenter.loadCharacter(characterName, BuildConfig.PUBLIC_API_KEY_MARVEL, String.valueOf(millis), BuildConfig.PRIVATE_API_KEY_MARVEL);
+            searchPresenter.loadCharacter(characterName);
         } else {
             Timber.i("Search Field  empty");
 

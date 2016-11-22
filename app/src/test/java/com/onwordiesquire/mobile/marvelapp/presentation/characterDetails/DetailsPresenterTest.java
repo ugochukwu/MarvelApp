@@ -1,5 +1,6 @@
 package com.onwordiesquire.mobile.marvelapp.presentation.characterDetails;
 
+import com.onwordiesquire.mobile.marvelapp.characterlookup.domain.model.MarvelCharacter;
 import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepositoryImpl;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterData;
 import com.onwordiesquire.mobile.marvelapp.util.RxSchedulersOverrideRule;
@@ -92,8 +93,9 @@ public class DetailsPresenterTest {
     }
 
     private void stubGetCharacterByIdSuceeds(CharacterData characterData) {
+        // TODO: 11/22/16 URGENTLY FIX THIS
         when(mockDataManager.getCharacterById(characterData.id()))
-                .thenReturn(Observable.just(characterData));
+                .thenReturn(Observable.just(new MarvelCharacter()));
     }
 
 }
