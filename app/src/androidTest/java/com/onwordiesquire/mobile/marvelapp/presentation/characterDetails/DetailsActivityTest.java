@@ -47,7 +47,7 @@ public class DetailsActivityTest {
     public void testLoadCharacterSuceeds() throws Exception
     {
         //arrange
-        CharacterData data = TestDataFactory.generateFakeMarvelCharacter(1);
+        CharacterData data = TestDataFactory.generateFakeCharacterDataObject(1);
         // TODO: 11/22/16 URGENTLY FIX THIS
         stubGetCharacter(Observable.just(new MarvelCharacter()));
         Intent startIntent = new Intent();
@@ -66,7 +66,7 @@ public class DetailsActivityTest {
     @Test
     public void testShowErrorView() throws Exception{
         //arrange
-        CharacterData data = TestDataFactory.generateFakeMarvelCharacter(1);
+        CharacterData data = TestDataFactory.generateFakeCharacterDataObject(1);
         stubGetCharacter(Observable.error(new Exception()));
         Intent startIntent = new Intent();
         startIntent.putExtra(MainActivity.CHARACTER_DATA_ID,data.id());

@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import rx.Observable;
 import rx.Scheduler;
+import timber.log.Timber;
 
 /**
  * Created by michelonwordi on 11/17/16.
@@ -36,6 +37,10 @@ public class GetCharacter extends UseCase<GetCharacter.RequestValues, GetCharact
                 .observeOn(uiThread)
                 .flatMap(character -> {
                    return Observable.just(new ResponseValues(character));
+                })
+                .doOnError(throwable -> {
+                    Timber.e(throwable.getMessage(),throwable);
+                    Observable.error(throwable);
                 });
     }
 

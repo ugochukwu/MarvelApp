@@ -1,6 +1,11 @@
 package com.onwordiesquire.mobile.marvelapp.presentation.SearchCharacter;
 
 import com.onwordiesquire.mobile.marvelapp.BuildConfig;
+import com.onwordiesquire.mobile.marvelapp.characterlookup.domain.model.MarvelCharacter;
+import com.onwordiesquire.mobile.marvelapp.characterlookup.domain.usecase.GetCharacter;
+import com.onwordiesquire.mobile.marvelapp.characterlookup.presentation.CharacterLookUpContract;
+import com.onwordiesquire.mobile.marvelapp.characterlookup.presentation.SearchPresenter;
+import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepository;
 import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepositoryImpl;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterData;
 import com.onwordiesquire.mobile.marvelapp.data.model.RecentSearches;
@@ -20,6 +25,7 @@ import java.util.List;
 import rx.Observable;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.never;
@@ -32,9 +38,11 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class SearchPresenterTest {
     @Mock
-    CharacterDataRepositoryImpl mockDataManager;
+    CharacterDataRepository mockDataManager;
     @Mock
-    SearchView mockSearchView;
+    CharacterLookUpContract.View mockSearchView;
+    @Mock
+    GetCharacter mockGetCharacterUseCase;
 
     SearchPresenter presenter;
     private List<RecentSearches> recentSearchesList = null;
@@ -45,7 +53,7 @@ public class SearchPresenterTest {
 
     @Before
     public void setup() {
-        presenter = new SearchPresenter(mockDataManager);
+        presenter = new SearchPresenter(mockGetCharacterUseCase);
         presenter.attachView(mockSearchView);
         recentSearchesList = TestDataFactory.generateRecentSearchResults(5);
 
@@ -55,13 +63,14 @@ public class SearchPresenterTest {
     public void testLoadLastSearchedResultsSucceed() throws Exception {
         //arrange
         stubGetRecentSearchesSucceed(recentSearchesList);
-
+// TODO: 11/22/16 re-implement this test when working on recent searches feature
         //act
-        presenter.loadLastSearchedCharacters();
+//        presenter.loadLastSearchedCharacters();
 
         //assert
-        verify(mockSearchView).displayLastFiveSearches(recentSearchesList);
-        verify(mockSearchView, never()).showError(anyString());
+//        verify(mockSearchView).displayLastFiveSearches(recentSearchesList);
+//        verify(mockSearchView, never()).showError(anyString());
+        fail();
     }
 
 
@@ -70,65 +79,67 @@ public class SearchPresenterTest {
 
         //arrange
         stubGetRecentSearchesFail();
+// TODO: 11/22/16 re-implement this test when working on recent searches feature
 
         //act
-        presenter.loadLastSearchedCharacters();
+//        presenter.loadLastSearchedCharacters();
 
         //arrange
-        verify(mockSearchView).showError(anyString());
+//        verify(mockSearchView).showError(anyString());
+        fail();
 
     }
 
     @Test
     public void testLoadCharacterSuceeds() throws Exception {
         //arrange
-        CharacterData characterData = TestDataFactory.generateFakeMarvelCharacter(1);
-        stubGetCharacterSuceeds(characterData);
+        MarvelCharacter character = TestDataFactory.generateFakeMarvelCharacter(1);
+        stubGetCharacterSuceeds(character);
 
         //act
-        presenter.loadCharacter(characterData.name(), BuildConfig.PUBLIC_API_KEY_MARVEL, "1", BuildConfig.PRIVATE_API_KEY_MARVEL);
+        presenter.loadCharacter(character.getName());
 
         //assert
         verify(mockSearchView).showProgressIndicator(false);
-        ArgumentCaptor<CharacterData> argumentCaptor = new ArgumentCaptor<>();
+        ArgumentCaptor<MarvelCharacter> argumentCaptor = new ArgumentCaptor<>();
         verify(mockSearchView).showCharacterDetails(argumentCaptor.capture());
-        assertEquals(argumentCaptor.getValue(),characterData);
+        assertEquals(argumentCaptor.getValue(), character);
 
     }
 
     @Test
-    public void testLoadCharacterDoesNotShowErrorIfEmpty() throws Exception{
+    public void testLoadCharacterDoesNotShowErrorIfEmpty() throws Exception {
         //arrange
         stubGetCharacterReturnEmpty();
 
         //act
-        presenter.loadCharacter("1", BuildConfig.PUBLIC_API_KEY_MARVEL, "1", BuildConfig.PRIVATE_API_KEY_MARVEL);
+        presenter.loadCharacter(anyString());
 
         //assert
         verify(mockSearchView).showProgressIndicator(false);
-        verify(mockSearchView).showEmptyState();
-        verify(mockSearchView,never()).showError("");
+        verify(mockSearchView).showEmptyState("An incorrect name was specified");
+        verify(mockSearchView, never()).showError("");
     }
 
     @Test
-    public void testGetCharacterEmitsMessageOnError() throws Exception{
+    public void testGetCharacterEmitsMessageOnError() throws Exception {
         //arrange
-        String message = "An Error Happened";
+        String message = "An error has occurred";
         stubGetCharacterFails(message);
 
         //act
-        presenter.loadCharacter("1", BuildConfig.PUBLIC_API_KEY_MARVEL, "1", BuildConfig.PRIVATE_API_KEY_MARVEL);
+        presenter.loadCharacter(anyString());
 
         //assert
         ArgumentCaptor<String> argumentCaptor = new ArgumentCaptor<>();
         verify(mockSearchView).showProgressIndicator(false);
         verify(mockSearchView).showError(argumentCaptor.capture());
-        verify(mockSearchView,never()).showEmptyState();
-        assertEquals(argumentCaptor.getValue(),message);
+        verify(mockSearchView, never()).showEmptyState(anyString());
+        assertEquals(argumentCaptor.getValue(), message);
     }
 
     private void stubGetCharacterFails(String message) {
-        when(mockDataManager.getCharacter(anyString(),anyString(),anyString(),anyString()))
+        when(mockGetCharacterUseCase.buildObservable(any()))
                 .thenReturn(Observable.error(new Exception(message)));
     }
 
@@ -136,17 +147,15 @@ public class SearchPresenterTest {
     //STUBS//
 
 
-
-    private void stubGetCharacterReturnEmpty()
-    {
-        when(mockDataManager.getCharacter(anyString(),anyString(),anyString(),anyString()))
-                .thenReturn(Observable.error(new CharacterDataRepositoryImpl.EmptyResultsException("")));
+    private void stubGetCharacterReturnEmpty() {
+        when(mockGetCharacterUseCase.buildObservable(any()))
+                .thenReturn(Observable.error(new CharacterDataRepository.EmptyResultsException("An error has occurred")));
 
     }
 
-    private void stubGetCharacterSuceeds(CharacterData characterData) {
-        when(mockDataManager.getCharacter(anyString(), anyString(), anyString(), anyString()))
-                .thenReturn(Observable.just(characterData));
+    private void stubGetCharacterSuceeds(MarvelCharacter character) {
+        when(mockGetCharacterUseCase.buildObservable(any()))
+                .thenReturn(Observable.just(new GetCharacter.ResponseValues(character)));
     }
 
 

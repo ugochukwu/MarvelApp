@@ -2,17 +2,9 @@ package com.onwordiesquire.mobile.marvelapp.characterlookup.presentation;
 
 import com.onwordiesquire.mobile.marvelapp.characterlookup.domain.usecase.GetCharacter;
 import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepository;
-import com.onwordiesquire.mobile.marvelapp.data.CharacterDataRepositoryImpl;
-import com.onwordiesquire.mobile.marvelapp.presentation.BasePresenter;
-import com.onwordiesquire.mobile.marvelapp.presentation.Presenter;
-import com.onwordiesquire.mobile.marvelapp.presentation.SearchCharacter.SearchView;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import timber.log.Timber;
 

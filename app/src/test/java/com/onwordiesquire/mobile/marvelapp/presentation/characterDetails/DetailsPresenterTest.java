@@ -45,7 +45,7 @@ public class DetailsPresenterTest {
     public void setup() {
         presenter = new DetailsPresenter(mockDataManager);
         presenter.attachView(mockDetailsView);
-        characterData = TestDataFactory.generateFakeMarvelCharacter(1);
+        characterData = TestDataFactory.generateFakeCharacterDataObject(1);
 
     }
 
