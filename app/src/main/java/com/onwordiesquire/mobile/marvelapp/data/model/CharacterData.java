@@ -42,8 +42,7 @@ public abstract class CharacterData {
         return new AutoValue_CharacterData.Builder();
     }
 
-    public static TypeAdapter<CharacterData> typeAdapter(Gson gson)
-    {
+    public static TypeAdapter<CharacterData> typeAdapter(Gson gson) {
         return new AutoValue_CharacterData.GsonTypeAdapter(gson);
     }
 
@@ -66,18 +65,4 @@ public abstract class CharacterData {
         public abstract CharacterData build();
 
     }
-
-//    @SerializedName("comics")
-
-//    public abstract Comics comics;
-
-//    @SerializedName("stories")
-
-//    public abstract Stories stories;
-//    @SerializedName("events")
-//
-//    public abstract Events events;
-//    @SerializedName("series")
-//
-//    public abstract Series series;
 }
