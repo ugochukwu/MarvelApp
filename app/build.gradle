@@ -8,10 +8,12 @@ buildscript {
     }
 }
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply plugin: 'io.fabric'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
+    mavenCentral()
 }
 
 android {
@@ -64,7 +66,7 @@ dependencies {
     final POWER_MOCKITO = "1.6.4"
     final RUNNER_VERSION = "0.5"
     final DEXMAKER_VERSION = "1.4"
-    final SUPPORT_LIBRARY_VERSION = "25.0.0"
+    final SUPPORT_LIBRARY_VERSION = "25.3.1"
     final ESPRESSO_VERSION = "2.2.2"
 
     def junit = "junit:junit:4.12"
@@ -74,17 +76,17 @@ dependencies {
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
     compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
     compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
     compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
-    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     compile 'com.squareup.sqlbrite:sqlbrite:0.7.0'
     compile 'commons-codec:commons-codec:1.5'
-    compile 'com.facebook.stetho:stetho:1.4.1'
-    compile 'com.jakewharton.timber:timber:4.1.2'
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.jakewharton.timber:timber:4.5.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.android.support:palette-v7:25.0.0'
+    compile "com.android.support:palette-v7:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
 
     compile junit
@@ -152,7 +154,7 @@ dependencies {
 
     //rxjava
     compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'io.reactivex:rxjava:1.2.1'
+    compile 'io.reactivex:rxjava:1.2.9'
 
     testCompile junit
     compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
@@ -160,8 +162,9 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
         transitive = true;
     }
-    compile 'com.android.support.constraint:constraint-layout:1.0.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath =
         true
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
