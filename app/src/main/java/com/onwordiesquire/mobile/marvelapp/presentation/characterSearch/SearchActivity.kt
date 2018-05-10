@@ -22,6 +22,7 @@ import com.onwordiesquire.mobile.marvelapp.presentation.characterDetails.Details
 import com.onwordiesquire.mobile.marvelapp.util.EmptyStateRecyclerView
 import com.onwordiesquire.mobile.marvelapp.util.MARVEL_CHARACTER_ID
 import com.onwordiesquire.mobile.marvelapp.util.textValue
+import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 class SearchActivity : BaseActivity(), SearchView {
@@ -96,11 +97,11 @@ class SearchActivity : BaseActivity(), SearchView {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         unbinder = ButterKnife.bind(this)
         searchPresenter.attachView(this)
-
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
     }
 

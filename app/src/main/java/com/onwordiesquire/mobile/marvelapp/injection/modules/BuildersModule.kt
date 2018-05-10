@@ -1,6 +1,7 @@
 package com.onwordiesquire.mobile.marvelapp.injection.modules
 
 import com.onwordiesquire.mobile.marvelapp.presentation.characterSearch.SearchActivity
+import com.onwordiesquire.mobile.marvelapp.presentation.characterSearch.module.SearchActivityModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,6 +11,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class BuildersModule {
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = arrayOf(SearchActivityModule::class))
     abstract fun bindSearchActivity(): SearchActivity
 }
