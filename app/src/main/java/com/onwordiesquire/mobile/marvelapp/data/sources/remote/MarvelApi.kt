@@ -1,4 +1,4 @@
-package com.onwordiesquire.mobile.marvelapp.data.sources.refactor.remote
+package com.onwordiesquire.mobile.marvelapp.data.sources.remote
 
 import com.onwordiesquire.mobile.marvelapp.data.responseModel.DataResponse
 import retrofit2.http.GET

@@ -1,4 +1,4 @@
-package com.onwordiesquire.mobile.marvelapp.data.refactor.data
+package com.onwordiesquire.mobile.marvelapp.data.model
 
 /**
  * Created by michel.onwordi on 09/07/2017.

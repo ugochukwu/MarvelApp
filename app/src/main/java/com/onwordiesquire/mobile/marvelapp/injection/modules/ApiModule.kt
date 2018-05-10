@@ -3,8 +3,7 @@ package com.onwordiesquire.mobile.marvelapp.injection.modules
 
 import com.google.gson.Gson
 import com.onwordiesquire.mobile.marvelapp.BuildConfig
-import com.onwordiesquire.mobile.marvelapp.data.sources.refactor.remote.MarvelApi
-import com.onwordiesquire.mobile.marvelapp.data.sources.remote.MarvelApiService
+import com.onwordiesquire.mobile.marvelapp.data.sources.remote.MarvelApi
 import com.onwordiesquire.mobile.marvelapp.util.ENDPOINT
 import dagger.Module
 import dagger.Provides
@@ -46,10 +45,6 @@ class ApiModule {
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .client(client)
                     .build()
-
-    @Provides
-    fun providesMarvelApiService(retrofit: Retrofit): MarvelApiService =
-            retrofit.create(MarvelApiService::class.java)
 
     @Provides
     fun providesMarvelApi(retrofit: Retrofit):MarvelApi =

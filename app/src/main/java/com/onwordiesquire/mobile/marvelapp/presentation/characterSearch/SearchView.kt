@@ -1,7 +1,7 @@
-package com.onwordiesquire.mobile.marvelapp.presentation.characterSearch.refactor
+package com.onwordiesquire.mobile.marvelapp.presentation.characterSearch
 
-import com.onwordiesquire.mobile.marvelapp.data.refactor.data.MarvelCharacter
-import com.onwordiesquire.mobile.marvelapp.data.refactor.data.RecentSearches
+import com.onwordiesquire.mobile.marvelapp.data.model.MarvelCharacter
+import com.onwordiesquire.mobile.marvelapp.data.model.RecentSearches
 import com.onwordiesquire.mobile.marvelapp.presentation.MvpView
 
 /**

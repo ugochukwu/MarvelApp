@@ -12,4 +12,4 @@ import dagger.Component
  */
 @Singleton
 @Component(modules = arrayOf(AppTestModule::class))
-interface TestAppComponent : MainComponent
+interface TestAppComponent

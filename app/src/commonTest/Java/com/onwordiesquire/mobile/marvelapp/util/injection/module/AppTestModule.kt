@@ -4,9 +4,6 @@ import android.app.Application
 import android.content.Context
 
 import com.onwordiesquire.mobile.marvelapp.MarvelApp
-import com.onwordiesquire.mobile.marvelapp.data.DataManager
-import com.onwordiesquire.mobile.marvelapp.data.sources.local.DatabaseDataSource
-import com.onwordiesquire.mobile.marvelapp.data.sources.remote.MarvelApiService
 
 import javax.inject.Singleton
 
@@ -34,21 +31,22 @@ class AppTestModule(var app: MarvelApp) {
         return app
     }
 
-    @Provides
-    @Singleton
-    fun provideApi(): MarvelApiService {
-        return mock(MarvelApiService::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun providesDataManager(): DataManager {
-        return mock(DataManager::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun providesDataSource(): DatabaseDataSource {
-        return mock(DatabaseDataSource::class.java)
-    }
+//    @Provides
+//    @Singleton
+//    fun provideApi(): MarvelApiService {
+//        return mock(MarvelApiService::class.java)
+//    }
+//
+//    @Provides
+//    @Singleton
+//    fun providesDataManager(): DataManager {
+//        return mock(DataManager::class.java)
+//    }
+//
+//    @Provides
+//    @Singleton
+//    fun providesDataSource(): DatabaseDataSource {
+//        return mock(DatabaseDataSource::class.java)
+//    }
+    // todo fix this
 }

@@ -2,12 +2,7 @@ package com.onwordiesquire.mobile.marvelapp.util;
 
 import android.content.Context;
 
-import com.onwordiesquire.mobile.marvelapp.MarvelApp;
-import com.onwordiesquire.mobile.marvelapp.data.DataManager;
-import com.onwordiesquire.mobile.marvelapp.data.sources.local.DatabaseDataSource;
-import com.onwordiesquire.mobile.marvelapp.data.sources.remote.MarvelApiService;
 import com.onwordiesquire.mobile.marvelapp.util.injection.component.TestAppComponent;
-import com.onwordiesquire.mobile.marvelapp.util.injection.module.AppTestModule;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -33,17 +28,17 @@ public class TestAppComponentRule implements TestRule {
         return context;
     }
 
-    public DataManager getMockDataManager() {
-        return testAppComponent.dataManager();
-    }
+//    public DataManager getMockDataManager() {
+//        return testAppComponent.dataManager();
+//    }
 
-    public DatabaseDataSource getMockDatabaseSource() {
-        return testAppComponent.databaseDataSource();
-    }
+//    public DatabaseDataSource getMockDatabaseSource() {
+//        return testAppComponent.databaseDataSource();
+//    }
 
-    public MarvelApiService getMockApi() {
-        return testAppComponent.marvelApiService();
-    }
+//    public MarvelApiService getMockApi() {
+//        return testAppComponent.marvelApiService();
+//    }
 
     @Override
     public Statement apply(final Statement base, Description description) {

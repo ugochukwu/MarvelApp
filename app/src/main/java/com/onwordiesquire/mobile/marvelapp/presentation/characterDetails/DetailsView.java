@@ -1,6 +1,6 @@
 package com.onwordiesquire.mobile.marvelapp.presentation.characterDetails;
 
-import com.onwordiesquire.mobile.marvelapp.data.model.CharacterData;
+import com.onwordiesquire.mobile.marvelapp.data.model.MarvelCharacter;
 import com.onwordiesquire.mobile.marvelapp.presentation.MvpView;
 
 /**
@@ -8,7 +8,7 @@ import com.onwordiesquire.mobile.marvelapp.presentation.MvpView;
  */
 
 public interface DetailsView extends MvpView {
-    void displayCharacterDetails(CharacterData characterData);
+    void displayCharacterDetails(MarvelCharacter characterData);
 
     void showError(String message);
 }

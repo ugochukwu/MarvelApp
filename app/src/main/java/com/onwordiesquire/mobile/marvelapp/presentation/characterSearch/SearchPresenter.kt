@@ -1,8 +1,7 @@
-package com.onwordiesquire.mobile.marvelapp.presentation.characterSearch.refactor
+package com.onwordiesquire.mobile.marvelapp.presentation.characterSearch
 
-import com.onwordiesquire.mobile.marvelapp.data.refactor.MarvelDataManager
+import com.onwordiesquire.mobile.marvelapp.data.MarvelDataManager
 import com.onwordiesquire.mobile.marvelapp.presentation.BasePresenter
-import com.onwordiesquire.mobile.marvelapp.presentation.MvpView
 import com.onwordiesquire.mobile.marvelapp.util.EmptyResultsException
 import com.onwordiesquire.mobile.marvelapp.util.VISIBLE
 import rx.android.schedulers.AndroidSchedulers
