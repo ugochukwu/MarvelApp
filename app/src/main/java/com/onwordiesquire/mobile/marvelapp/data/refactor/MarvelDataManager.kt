@@ -27,7 +27,7 @@ DatabaseDataSource) {
                         dataResponse?.data?.results?.first()?.let {
                             Observable.just<MarvelCharacter>(MarvelCharacter(it.id, it.name,
                                     it.description, it.modified,
-                                    it.resourceURI, it.urls?.map { Url(it.type, it.url) },
+                                    it.resourceURI, it.urls.map { Url(it.type, it.url) },
                                     it.thumbnail.let { Thumbnail(it.path, it.extension, it.id) }))
                         } ?: Observable.error(EmptyResultsException())
                     }

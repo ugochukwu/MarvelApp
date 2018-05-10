@@ -1,4 +1,4 @@
-package com.onwordiesquire.mobile.marvelapp.presentation.SearchCharacter;
+package com.onwordiesquire.mobile.marvelapp.presentation.characterSearch;
 
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.contrib.RecyclerViewActions;
@@ -31,7 +31,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 
-import static android.support.test.espresso.matcher.ViewMatchers.withInputType;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;

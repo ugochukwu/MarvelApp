@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.onwordiesquire.mobile.marvelapp">
+<manifest package="com.onwordiesquire.mobile.marvelapp"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".MarvelApp"
         android:allowBackup="true"
@@ -10,17 +11,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.SearchCharacter.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".presentation.characterSearch.MainActivity">
         </activity>
         <activity android:name=".presentation.characterDetails.DetailsActivity"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="0c9421826a04e27de6dd6302ed4ff9737793211e" />
+            android:value="0c9421826a04e27de6dd6302ed4ff9737793211e"/>
+
+        <activity android:name=".presentation.characterSearch.refactor.SearchActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

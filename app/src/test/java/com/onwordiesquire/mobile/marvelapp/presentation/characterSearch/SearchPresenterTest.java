@@ -1,4 +1,4 @@
-package com.onwordiesquire.mobile.marvelapp.presentation.SearchCharacter;
+package com.onwordiesquire.mobile.marvelapp.presentation.characterSearch;
 
 import com.onwordiesquire.mobile.marvelapp.BuildConfig;
 import com.onwordiesquire.mobile.marvelapp.data.DataManager;

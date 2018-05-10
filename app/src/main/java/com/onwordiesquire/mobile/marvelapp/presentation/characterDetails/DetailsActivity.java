@@ -2,7 +2,6 @@ package com.onwordiesquire.mobile.marvelapp.presentation.characterDetails;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -22,9 +21,7 @@ import com.onwordiesquire.mobile.marvelapp.MarvelApp;
 import com.onwordiesquire.mobile.marvelapp.R;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterData;
 import com.onwordiesquire.mobile.marvelapp.data.model.Thumbnail;
-import com.onwordiesquire.mobile.marvelapp.presentation.SearchCharacter.MainActivity;
-
-import org.w3c.dom.Text;
+import com.onwordiesquire.mobile.marvelapp.presentation.characterSearch.MainActivity;
 
 import javax.inject.Inject;
 

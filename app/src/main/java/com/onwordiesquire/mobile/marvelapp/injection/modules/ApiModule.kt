@@ -1,8 +1,9 @@
 @file:JvmName("ApiModule")
-package com.onwordiesquire.mobile.marvelapp.injection.module
+package com.onwordiesquire.mobile.marvelapp.injection.modules
 
 import com.google.gson.Gson
 import com.onwordiesquire.mobile.marvelapp.BuildConfig
+import com.onwordiesquire.mobile.marvelapp.data.sources.refactor.remote.MarvelApi
 import com.onwordiesquire.mobile.marvelapp.data.sources.remote.MarvelApiService
 import com.onwordiesquire.mobile.marvelapp.util.ENDPOINT
 import dagger.Module
@@ -49,4 +50,8 @@ class ApiModule {
     @Provides
     fun providesMarvelApiService(retrofit: Retrofit): MarvelApiService =
             retrofit.create(MarvelApiService::class.java)
+
+    @Provides
+    fun providesMarvelApi(retrofit: Retrofit):MarvelApi =
+            retrofit.create(MarvelApi::class.java)
 }

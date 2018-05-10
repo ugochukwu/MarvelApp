@@ -5,14 +5,11 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.onwordiesquire.mobile.marvelapp.R;
 import com.onwordiesquire.mobile.marvelapp.data.model.CharacterData;
-import com.onwordiesquire.mobile.marvelapp.data.model.RecentSearches;
-import com.onwordiesquire.mobile.marvelapp.presentation.SearchCharacter.MainActivity;
+import com.onwordiesquire.mobile.marvelapp.presentation.characterSearch.MainActivity;
 import com.onwordiesquire.mobile.marvelapp.util.TestAppComponentRule;
 import com.onwordiesquire.mobile.marvelapp.util.TestDataFactory;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.RuleChain;
@@ -27,7 +24,6 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 

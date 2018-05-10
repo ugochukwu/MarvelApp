@@ -1,10 +1,9 @@
-package com.onwordiesquire.mobile.marvelapp.injection.module
+package com.onwordiesquire.mobile.marvelapp.injection.modules
 
 import android.app.Application
 import android.content.Context
 
 import com.onwordiesquire.mobile.marvelapp.MarvelApp
-import com.onwordiesquire.mobile.marvelapp.data.sources.remote.MarvelApiService
 
 import javax.inject.Singleton
 
@@ -16,7 +15,6 @@ import dagger.Provides
  */
 @Module
 class AppModule(var app: MarvelApp) {
-
 
     @Provides
     @Singleton

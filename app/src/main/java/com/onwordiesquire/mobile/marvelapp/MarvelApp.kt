@@ -7,7 +7,7 @@ import com.crashlytics.android.Crashlytics
 import com.facebook.stetho.Stetho
 import com.onwordiesquire.mobile.marvelapp.injection.components.DaggerMainComponent
 import com.onwordiesquire.mobile.marvelapp.injection.components.MainComponent
-import com.onwordiesquire.mobile.marvelapp.injection.module.AppModule
+import com.onwordiesquire.mobile.marvelapp.injection.modules.AppModule
 
 import io.fabric.sdk.android.Fabric
 import timber.log.Timber

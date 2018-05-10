@@ -3,9 +3,10 @@ package com.onwordiesquire.mobile.marvelapp.injection.components
 import com.onwordiesquire.mobile.marvelapp.data.DataManager
 import com.onwordiesquire.mobile.marvelapp.data.sources.local.DatabaseDataSource
 import com.onwordiesquire.mobile.marvelapp.data.sources.remote.MarvelApiService
-import com.onwordiesquire.mobile.marvelapp.injection.module.ApiModule
-import com.onwordiesquire.mobile.marvelapp.injection.module.AppModule
-import com.onwordiesquire.mobile.marvelapp.presentation.SearchCharacter.MainActivity
+import com.onwordiesquire.mobile.marvelapp.injection.modules.ApiModule
+import com.onwordiesquire.mobile.marvelapp.injection.modules.AppModule
+import com.onwordiesquire.mobile.marvelapp.presentation.characterSearch.MainActivity
+import com.onwordiesquire.mobile.marvelapp.presentation.characterSearch.refactor.SearchActivity
 import com.onwordiesquire.mobile.marvelapp.presentation.characterDetails.DetailsActivity
 
 import javax.inject.Singleton
@@ -28,4 +29,5 @@ interface MainComponent {
     fun databaseDataSource(): DatabaseDataSource
 
     fun marvelApiService(): MarvelApiService
+    fun inject(searchActivity: SearchActivity)
 }

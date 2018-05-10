@@ -1,7 +1,8 @@
-package com.onwordiesquire.mobile.marvelapp.presentation.SearchCharacter.refactor
+package com.onwordiesquire.mobile.marvelapp.presentation.characterSearch.refactor
 
 import com.onwordiesquire.mobile.marvelapp.data.refactor.MarvelDataManager
 import com.onwordiesquire.mobile.marvelapp.presentation.BasePresenter
+import com.onwordiesquire.mobile.marvelapp.presentation.MvpView
 import com.onwordiesquire.mobile.marvelapp.util.EmptyResultsException
 import com.onwordiesquire.mobile.marvelapp.util.VISIBLE
 import rx.android.schedulers.AndroidSchedulers
@@ -14,12 +15,13 @@ import javax.inject.Inject
  * Created by michel.onwordi on 10/07/2017.
  */
 class SearchPresenter @Inject constructor(val dataManager: MarvelDataManager) : BasePresenter<SearchView>() {
-    lateinit var compositeSubscription: CompositeSubscription
 
-    override fun attachView(view: SearchView?) {
+    override fun attachView(view: SearchView) {
         super.attachView(view)
         compositeSubscription = CompositeSubscription()
     }
+
+    lateinit var compositeSubscription: CompositeSubscription
 
     override fun detachView() {
         super.detachView()
@@ -38,7 +40,7 @@ class SearchPresenter @Inject constructor(val dataManager: MarvelDataManager) : 
                     }, { error ->
                         it.showProgress(!VISIBLE)
                         if (error is EmptyResultsException) {
-                            it.showEmptyState()
+                            it.showEmptyState("Sorry can't find that name")
                         } else {
                             it.showError("An Error Happened")
                             Timber.e(error.message, error)
@@ -47,4 +49,13 @@ class SearchPresenter @Inject constructor(val dataManager: MarvelDataManager) : 
         }
 
     }
+
+    fun onSearchClick(textValue: String) =
+            if (textValue.isEmpty()) {
+                Timber.i("Search field Not empty")
+
+            } else {
+
+                Timber.i("Search field  empty")
+            }
 }

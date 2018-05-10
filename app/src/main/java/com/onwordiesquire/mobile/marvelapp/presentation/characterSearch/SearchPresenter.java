@@ -1,9 +1,7 @@
-package com.onwordiesquire.mobile.marvelapp.presentation.SearchCharacter;
+package com.onwordiesquire.mobile.marvelapp.presentation.characterSearch;
 
 import com.onwordiesquire.mobile.marvelapp.data.DataManager;
 import com.onwordiesquire.mobile.marvelapp.presentation.BasePresenter;
-
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
