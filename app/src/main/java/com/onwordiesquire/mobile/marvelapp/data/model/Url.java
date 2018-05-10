@@ -18,13 +18,11 @@ public abstract class Url {
     @Nullable
     public abstract String url();
 
-    public static Builder builder()
-    {
+    public static Builder builder() {
         return new AutoValue_Url.Builder();
     }
 
-    public static TypeAdapter<Url> typeAdapter(Gson gson)
-    {
+    public static TypeAdapter<Url> typeAdapter(Gson gson) {
         return new AutoValue_Url.GsonTypeAdapter(gson);
     }
 
