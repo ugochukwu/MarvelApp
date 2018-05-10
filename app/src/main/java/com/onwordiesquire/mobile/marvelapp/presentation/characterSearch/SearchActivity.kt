@@ -95,14 +95,9 @@ class SearchActivity : BaseActivity(), SearchView {
         }
     }
 
-    override fun initializeDagger() {
-        MarvelApp.component.inject(this)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initializeDagger()
         unbinder = ButterKnife.bind(this)
         searchPresenter.attachView(this)
 
@@ -114,5 +109,4 @@ class SearchActivity : BaseActivity(), SearchView {
         unbinder.unbind()
         searchPresenter.detachView()
     }
-
 }
