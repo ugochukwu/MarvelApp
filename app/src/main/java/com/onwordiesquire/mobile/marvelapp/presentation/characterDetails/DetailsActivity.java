@@ -56,7 +56,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
         setContentView(R.layout.activity_character_details);
         ButterKnife.bind(this);
 
-        MarvelApp.get().getComponent().inject(this);
+        MarvelApp.component.inject(this);
 
         Intent intent = getIntent();
         String characterDataId = intent.getStringExtra(MainActivity.CHARACTER_DATA_ID);
@@ -87,13 +87,13 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
     public void displayCharacterDetails(CharacterData characterData) {
         String name = characterData.name();
         nameTxtView.setText(name);
-        description.setText(TextUtils.isEmpty(characterData.description())?getString(R.string.desc_not_available):characterData.description());
+        description.setText(TextUtils.isEmpty(characterData.description()) ? getString(R.string.desc_not_available) : characterData.description());
         Thumbnail thumbnail = characterData.thumbnail();
         if (thumbnail != null) {
             String portrait_xlarge = thumbnail.path().concat("/portrait_xlarge").concat(".").concat(thumbnail.extension());
-            Timber.i("Loading image at path %s ....",portrait_xlarge);
+            Timber.i("Loading image at path %s ....", portrait_xlarge);
 
-            BitmapImageViewTarget bimt = new BitmapImageViewTarget(imageView){
+            BitmapImageViewTarget bimt = new BitmapImageViewTarget(imageView) {
                 @Override
                 public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                     super.onResourceReady(resource, glideAnimation);
@@ -101,8 +101,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
                         Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
                         Palette.Swatch lightVibrantSwatch = palette.getDarkMutedSwatch();
 
-                        if(vibrantSwatch != null)
-                        {
+                        if (vibrantSwatch != null) {
                             nameTxtView.setTextColor(vibrantSwatch.getRgb());
                         }
 
@@ -111,15 +110,15 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView {
             };
 
             Glide.with(this).load(portrait_xlarge)
-                    .asBitmap()
-                    .placeholder(R.mipmap.ic_marvel_launcher)
-                    .into(bimt);
+                .asBitmap()
+                .placeholder(R.mipmap.ic_marvel_launcher)
+                .into(bimt);
         }
     }
 
     @Override
     public void showError(String message) {
-        Snackbar.make(nameTxtView,message,Snackbar.LENGTH_LONG).show();
+        Snackbar.make(nameTxtView, message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override

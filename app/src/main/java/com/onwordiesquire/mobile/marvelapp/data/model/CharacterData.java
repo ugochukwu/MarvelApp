@@ -15,7 +15,6 @@ import java.util.List;
 @AutoValue
 public abstract class CharacterData {
 
-
     @Nullable
     public abstract String id();
 

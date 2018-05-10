@@ -12,6 +12,8 @@ import com.onwordiesquire.mobile.marvelapp.util.MyGsonTypeAdapterFactory;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 
+import javax.inject.Singleton;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -25,7 +27,7 @@ import rx.Observable;
 /**
  * Created by michelonwordi on 10/23/16.
  */
-
+@Singleton
 public interface MarvelApiService {
 
     public String ENDPOINT = "http://gateway.marvel.com:80/v1/public/";
@@ -33,7 +35,6 @@ public interface MarvelApiService {
     @GET("characters")
     public Observable<CharacterDataWrapper> getMarvelCharacter(@Query("name") String name, @Query("apikey") String apikey,
                                                                @Query("ts") String timestamp, @Query("hash") String md5Hash);
-
 
     class HELPER {
 
@@ -50,20 +51,16 @@ public interface MarvelApiService {
 
 
             Gson gson = new GsonBuilder().registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())
-                    .create();
+                .create();
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(ENDPOINT)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .client(client)
-                    .build();
+                .baseUrl(ENDPOINT)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(client)
+                .build();
 
             return retrofit.create(MarvelApiService.class);
-        }
-
-        public static String createHash(String timestamp, String apikey, String privateKey) {
-            return new String(Hex.encodeHex(DigestUtils.md5(timestamp + privateKey + apikey)));
         }
     }
 }

@@ -1,6 +1,6 @@
-package com.onwordiesquire.mobile.marvelapp.data.model
+package com.onwordiesquire.mobile.marvelapp.data.responseModel
 
 /**
  * Created by michel.onwordi on 13/06/2017.
  */
-data class RecentSearchesDto(val name: String, val characterId: String)
+data class RecentSearches(val name: String, val characterId: String)

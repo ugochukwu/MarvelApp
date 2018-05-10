@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements SearchView {
     public static final String CHARACTER_DATA_ID = TAG.concat("character_data_id");
     @Inject
     SearchPresenter searchPresenter;
+    @Inject
+    com.onwordiesquire.mobile.marvelapp.presentation.SearchCharacter.refactor.SearchPresenter searchPresenterRefactor;
     @BindView(R.id.recyclerView)
     EmptyStateRecyclerView recyclerView;
     @BindView(R.id.search_field_edt_txt)
@@ -66,14 +68,12 @@ public class MainActivity extends AppCompatActivity implements SearchView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        MarvelApp.get().getComponent().inject(this);
+        MarvelApp.component.inject(this);
         searchPresenter.attachView(this);
-
         setupRecycler();
 
         searchPresenter.loadLastSearchedCharacters();
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
     private void setupRecycler() {
@@ -104,9 +104,9 @@ public class MainActivity extends AppCompatActivity implements SearchView {
     }
 
     private void showSnackbar(String message) {
-        if(snackbar == null) {
+        if (snackbar == null) {
             snackbar = Snackbar.make(recyclerView, message, Snackbar.LENGTH_LONG);
-            snackbar.getView().setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
+            snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         }
         snackbar.show();
     }

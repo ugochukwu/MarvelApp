@@ -1,6 +1,6 @@
-package com.onwordiesquire.mobile.marvelapp.data.model
+package com.onwordiesquire.mobile.marvelapp.data.responseModel
 
 /**
  * Created by michel.onwordi on 13/06/2017.
  */
-data class UrlDto(val type: String, val url: String)
+data class Url(val type: String, val url: String)

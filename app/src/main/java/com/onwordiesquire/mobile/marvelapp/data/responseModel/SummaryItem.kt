@@ -1,6 +1,6 @@
-package com.onwordiesquire.mobile.marvelapp.data.model
+package com.onwordiesquire.mobile.marvelapp.data.responseModel
 
 /**
  * Created by michel.onwordi on 13/06/2017.
  */
-data class SummaryItemDto(val resourceURI: String, val name: String, val type: String)
+data class SummaryItem(val resourceURI: String, val name: String, val type: String)
