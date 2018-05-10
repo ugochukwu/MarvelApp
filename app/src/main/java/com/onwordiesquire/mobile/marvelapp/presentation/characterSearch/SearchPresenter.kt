@@ -4,9 +4,9 @@ import com.onwordiesquire.mobile.marvelapp.data.MarvelDataManager
 import com.onwordiesquire.mobile.marvelapp.presentation.BasePresenter
 import com.onwordiesquire.mobile.marvelapp.util.EmptyResultsException
 import com.onwordiesquire.mobile.marvelapp.util.VISIBLE
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
-import rx.subscriptions.CompositeSubscription
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -17,14 +17,14 @@ class SearchPresenter @Inject constructor(val dataManager: MarvelDataManager) : 
 
     override fun attachView(view: SearchView) {
         super.attachView(view)
-        compositeSubscription = CompositeSubscription()
+        compositeSubscription = CompositeDisposable()
     }
 
-    lateinit var compositeSubscription: CompositeSubscription
+    lateinit var compositeSubscription: CompositeDisposable
 
     override fun detachView() {
         super.detachView()
-        compositeSubscription.clear()
+        compositeSubscription.dispose()
     }
 
     fun findCharacter(name: String, timeStamp: String) {

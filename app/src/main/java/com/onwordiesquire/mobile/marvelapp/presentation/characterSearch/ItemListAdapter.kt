@@ -8,7 +8,7 @@ import butterknife.BindView
 import butterknife.OnClick
 import com.onwordiesquire.mobile.marvelapp.R
 import com.onwordiesquire.mobile.marvelapp.data.model.MarvelCharacter
-import com.onwordiesquire.mobile.marvelapp.data.model.RecentSearches
+import com.onwordiesquire.mobile.marvelapp.data.model.RecentSearch
 
 /**
  * Created by michel.onwordi on 13/07/2017.
@@ -27,7 +27,7 @@ class ItemListAdapter(val listener: (name: String) -> Unit) : RecyclerView.Adapt
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    fun setData(recentSearches:List<RecentSearches>){
+    fun setData(recentSearches:List<RecentSearch>){
 
     }
 

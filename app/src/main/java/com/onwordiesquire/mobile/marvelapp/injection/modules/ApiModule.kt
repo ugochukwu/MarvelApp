@@ -1,4 +1,5 @@
 @file:JvmName("ApiModule")
+
 package com.onwordiesquire.mobile.marvelapp.injection.modules
 
 import com.google.gson.Gson
@@ -10,7 +11,7 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 
@@ -42,11 +43,11 @@ class ApiModule {
             Retrofit.Builder()
                     .baseUrl(endpoint)
                     .addConverterFactory(GsonConverterFactory.create(gson))
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(client)
                     .build()
 
     @Provides
-    fun providesMarvelApi(retrofit: Retrofit):MarvelApi =
+    fun providesMarvelApi(retrofit: Retrofit): MarvelApi =
             retrofit.create(MarvelApi::class.java)
 }

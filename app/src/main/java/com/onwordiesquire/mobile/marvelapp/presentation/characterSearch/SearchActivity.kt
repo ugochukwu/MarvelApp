@@ -2,7 +2,6 @@ package com.onwordiesquire.mobile.marvelapp.presentation.characterSearch
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputEditText
@@ -11,12 +10,10 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import butterknife.BindView
-import butterknife.ButterKnife
 import butterknife.OnClick
-import com.onwordiesquire.mobile.marvelapp.MarvelApp
 import com.onwordiesquire.mobile.marvelapp.R
 import com.onwordiesquire.mobile.marvelapp.data.model.MarvelCharacter
-import com.onwordiesquire.mobile.marvelapp.data.model.RecentSearches
+import com.onwordiesquire.mobile.marvelapp.data.model.RecentSearch
 import com.onwordiesquire.mobile.marvelapp.presentation.BaseActivity
 import com.onwordiesquire.mobile.marvelapp.presentation.characterDetails.DetailsActivity
 import com.onwordiesquire.mobile.marvelapp.util.EmptyStateRecyclerView
@@ -37,7 +34,7 @@ class SearchActivity : BaseActivity(), SearchView {
         Snackbar.make(recyclerView, "", Snackbar.LENGTH_LONG)
     }
 
-    override fun displayLastFiveSearches(searches: List<RecentSearches>) {
+    override fun displayLastFiveSearches(searches: List<RecentSearch>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -61,8 +58,6 @@ class SearchActivity : BaseActivity(), SearchView {
     override fun showProgress(visible: Boolean) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
-    override fun getView(): AppCompatActivity = this
 
     override fun initializePresenter() {
         presenter = searchPresenter
@@ -100,14 +95,12 @@ class SearchActivity : BaseActivity(), SearchView {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        unbinder = ButterKnife.bind(this)
         searchPresenter.attachView(this)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        unbinder.unbind()
         searchPresenter.detachView()
     }
 }
