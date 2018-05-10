@@ -1,6 +1,5 @@
 package com.onwordiesquire.mobile.marvelapp.injection.components
 
-import com.onwordiesquire.mobile.marvelapp.data.DataManager
 import com.onwordiesquire.mobile.marvelapp.data.sources.local.DatabaseDataSource
 import com.onwordiesquire.mobile.marvelapp.data.sources.remote.MarvelApiService
 import com.onwordiesquire.mobile.marvelapp.injection.modules.ApiModule
@@ -24,7 +23,6 @@ interface MainComponent {
     fun inject(detailsActivity: DetailsActivity)
 
     //expose data manager to downstream components
-    fun dataManager(): DataManager
 
     fun databaseDataSource(): DatabaseDataSource
 

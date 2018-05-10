@@ -1,6 +1,6 @@
 package com.onwordiesquire.mobile.marvelapp.presentation.characterDetails;
 
-import com.onwordiesquire.mobile.marvelapp.data.DataManager;
+import com.onwordiesquire.mobile.marvelapp.data.refactor.MarvelDataManager;
 import com.onwordiesquire.mobile.marvelapp.presentation.BasePresenter;
 import com.onwordiesquire.mobile.marvelapp.presentation.MvpView;
 
@@ -18,11 +18,11 @@ import timber.log.Timber;
 @Singleton
 public class DetailsPresenter extends BasePresenter<DetailsView> {
 
-    private final DataManager dataManager;
+    private final MarvelDataManager dataManager;
     private CompositeSubscription compositeSubscription;
 
     @Inject
-    public DetailsPresenter(DataManager dataManager) {
+    public DetailsPresenter(MarvelDataManager dataManager) {
         this.dataManager = dataManager;
     }
 
@@ -41,15 +41,5 @@ public class DetailsPresenter extends BasePresenter<DetailsView> {
     public void loadCharacter(String characterId)
     {
         isViewAttached();
-        dataManager.getCharacterById(characterId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(characterData -> {
-                   getMvpView().displayCharacterDetails(characterData);
-
-                },e->{
-                    getMvpView().showError("An Error Occurred");
-                    Timber.e(e.getMessage(),e);
-                });
     }
 }
