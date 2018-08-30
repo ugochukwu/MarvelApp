@@ -1,6 +1,8 @@
 package com.onwordiesquire.mobile.marvelapp.presentation.characterSearch
 
 import android.app.Activity
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -18,13 +20,15 @@ import com.onwordiesquire.mobile.marvelapp.presentation.BaseActivity
 import com.onwordiesquire.mobile.marvelapp.presentation.characterDetails.DetailsActivity
 import com.onwordiesquire.mobile.marvelapp.util.EmptyStateRecyclerView
 import com.onwordiesquire.mobile.marvelapp.util.MARVEL_CHARACTER_ID
-import com.onwordiesquire.mobile.marvelapp.util.textValue
+import com.onwordiesquire.mobile.marvelapp.util.ViewModelFactory
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 class SearchActivity : BaseActivity(), SearchView {
 
-    @Inject lateinit var searchPresenter: SearchPresenter
+    @Inject
+    lateinit var viewmodelFactory: ViewModelFactory
+    private lateinit var viewModel: SearchViewModel
 
     @BindView(R.id.recyclerView) lateinit var recyclerView: EmptyStateRecyclerView
     @BindView(R.id.search_field_edt_txt) lateinit var searchField: TextInputEditText
@@ -60,8 +64,6 @@ class SearchActivity : BaseActivity(), SearchView {
     }
 
     override fun initializePresenter() {
-        presenter = searchPresenter
-        (presenter as SearchPresenter).attachView(this)
     }
 
     private fun showSnackbar(message: String) {
@@ -76,7 +78,7 @@ class SearchActivity : BaseActivity(), SearchView {
         val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
 
-        searchPresenter.onSearchClick(searchField.textValue)
+//        searchPresenter.onSearchClick(searchField.textValue)
 
     }
 
@@ -95,12 +97,25 @@ class SearchActivity : BaseActivity(), SearchView {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        searchPresenter.attachView(this)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+
+        viewModel = ViewModelProviders.of(this, viewmodelFactory).get(SearchViewModel::class.java)
+        viewModel.loadData()
+
+        observerViewModelEvents()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        searchPresenter.detachView()
+    private fun observerViewModelEvents() {
+        viewModel.recentSearches().observe(this, Observer { recentSearchList ->
+            recentSearchList?.let {
+                with(recyclerView) {
+                    (adapter as ItemListAdapter).apply {
+                        setData(recentSearchList)
+                        notifyDataSetChanged()
+                    }
+                }
+            }
+        })
     }
+
 }

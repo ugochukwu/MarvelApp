@@ -26,7 +26,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun providesDatabase(app: MarvelApp) = Room.databaseBuilder(app.applicationContext, MarvelAppDatabase::class.java, "Marvel.db")
+    fun providesDatabase(app: MarvelApp) = Room.databaseBuilder(app.applicationContext, MarvelAppDatabase::class.java, "Marvel.db").build()
 
     @Provides
     @Singleton

@@ -34,4 +34,6 @@ class MarvelDataManager @Inject constructor(private val remoteDataSource: Marvel
     private fun createHash(timestamp: String, apiKey: String, privateKey: String) =
             String(Hex.encodeHex(DigestUtils.md5(timestamp + privateKey + apiKey)))
 
+    fun getRecentSearchList() = recentSearchDao.loadRecentSearches()
+
 }
